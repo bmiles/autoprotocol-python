@@ -1068,3 +1068,37 @@ class MeasureConcentration(Instruction):
                      "dataref": dataref,
                      "measurement": measurement}
         super(MeasureConcentration, self).__init__(json_dict)
+
+class GelPurify(Instruction):
+    """
+    {
+      "op": "dna_gel_purification",
+      "volume": volume "objects": [wells],
+      "matrix": gel,
+      "ladder": ladder,
+      "dataref": string,
+      "extract": [{
+        "elution_volume": volume,
+        "elution_buffer": string "water" | "TE",
+        "lane": int,
+        "band_size_range": {
+          "min_bp": int,
+          "max_bp": int,
+        },
+        "destination": well
+      },
+      {...}]
+    }
+    """
+
+    def __init__(self, wells, volume, gel, ladder, dataref, extract):
+        json_dict = {
+                      "op": "dna_gel_purification",
+                      "objects": wells,
+                      "volume": volume,
+                      "matrix": gel,
+                      "ladder": ladder,
+                      "dataref": string,
+                      "extract": extractions
+                    }
+        super(GelPurify, self).__init__(json_dict)
